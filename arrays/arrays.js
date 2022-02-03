@@ -64,11 +64,66 @@ function URLify(str) {
 
 //console.log(URLify("MR John Smith    "))
 
-
 //  1.4  Palindome Permutation
+//TODO
+function isAPalindronmePermutation(str) {
+  let cleanString = str.split(" ").join("");
 
+  let j = cleanString.length - 1;
+  let isPalindrome = true;
+  for (let i = 0; i < cleanString.length; i++) {
+    if (cleanString[i] != cleanString[j]) {
+      isPalindrome = false;
+    }
+    j--;
+  }
+
+  return isPalindrome;
+}
+
+//console.log(isAPalindronmePermutation("tacocat"));
 
 //  1.5 One Way
+
+function oneWay(string) {}
+
+//  1.6  String Compression
+
+function stringCompression(str) {
+  let strArray = Array.from(str);
+
+  if (strArray.length === 0) {
+    return "";
+  }
+
+  let newStr = "";
+  let previousChar = strArray[0];
+  let counter = 0;
+
+  newStr += previousChar;
+  for (let i = 0; i < strArray.length; i++) {
+    //console.log(strArray[i]);
+    if (previousChar != strArray[i]) {
+      newStr += counter.toString() + strArray[i];
+      counter = 1;
+      previousChar = strArray[i];
+      continue;
+    }
+
+    if (previousChar === strArray[i]) {
+      counter++;
+    }
+
+    if (i + 1 === strArray.length) {
+      newStr += counter.toString();
+    }
+  }
+
+  return newStr.length < str.length ? newStr : str;
+}
+
+//console.log(stringCompression("aabcccccaaa"));
+
 
 
 
