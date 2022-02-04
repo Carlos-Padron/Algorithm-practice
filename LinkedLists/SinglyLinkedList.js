@@ -8,6 +8,7 @@ class Node {
 class SinglyLinkedList {
   constructor(head) {
     this.head = head;
+    this.size = 0;
   }
 
   prependNode(node) {
@@ -15,6 +16,7 @@ class SinglyLinkedList {
 
     node.next = head;
     this.head = node;
+    this.size++;
   }
 
   appendNode(node) {
@@ -27,6 +29,7 @@ class SinglyLinkedList {
     let newNode = node;
 
     n.next = newNode;
+    this.size++;
   }
 
   removeNode(data) {
@@ -40,10 +43,31 @@ class SinglyLinkedList {
     while (n.next != null) {
       if (n.next.data == data) {
         n.next = n.next.next;
+        this.size--;
         break;
       }
       n = n.next;
     }
+  }
+
+  insertNodeAtIndex(index, node) {
+
+    if (index > this.size - 1) {
+      return;
+    }
+
+    let counter = 0;
+    let n = this.head;
+
+    while (counter != index - 1 && index < this.size - 1) {
+      n = n.next;
+      counter++;
+    }
+
+    let nextNode = n.next;
+
+    node.next = nextNode;
+    n.next = node;
   }
 
   printSinglyLinkedList() {
@@ -67,26 +91,16 @@ function main() {
   singlyLinkedList.appendNode(new Node(3));
   singlyLinkedList.appendNode(new Node(4));
   singlyLinkedList.appendNode(new Node(5));
-  //console.log(singlyLinkedList);
-  console.log("=== LinkedList ===");
-  singlyLinkedList.printSinglyLinkedList();
 
   singlyLinkedList.removeNode(1);
 
-  console.log("=== LinkedList ===");
-  singlyLinkedList.printSinglyLinkedList();
-
   singlyLinkedList.removeNode(3);
-
-  console.log("=== LinkedList ===");
-  singlyLinkedList.printSinglyLinkedList();
-
 
   singlyLinkedList.prependNode(new Node(0));
 
-  console.log("=== LinkedList ===");
-  singlyLinkedList.printSinglyLinkedList();
+  singlyLinkedList.insertNodeAtIndex(2, new Node(7));
 
+  singlyLinkedList.printSinglyLinkedList();
 }
 
 main();
