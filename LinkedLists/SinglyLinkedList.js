@@ -51,13 +51,21 @@ class SinglyLinkedList {
   }
 
   insertNodeAtIndex(index, node) {
-
-    if (index > this.size - 1) {
+    if (index > this.size - 1 || index < 0) {
       return;
     }
 
     let counter = 0;
     let n = this.head;
+
+    if (index == 0) {
+      let nextNode = this.head;
+
+      this.head = node;
+      this.head.next = nextNode;
+      this.size++;
+      return;
+    }
 
     while (counter != index - 1 && index < this.size - 1) {
       n = n.next;
@@ -68,6 +76,30 @@ class SinglyLinkedList {
 
     node.next = nextNode;
     n.next = node;
+    this.size++;
+  }
+
+  removeNodeAtInde(index) {
+    if (index > this.size - 1 || index < 0) {
+      return;
+    }
+
+    let counter = 0;
+    let n = this.head;
+
+    if (index == 0) {
+      this.head = n.next;
+      this.size--;
+      return;
+    }
+
+    while (counter != index - 1 && index < this.size - 1) {
+      n = n.next;
+      counter++;
+    }
+
+    n.next = n.next.next;
+    this.size--;
   }
 
   printSinglyLinkedList() {
@@ -98,7 +130,9 @@ function main() {
 
   singlyLinkedList.prependNode(new Node(0));
 
-  singlyLinkedList.insertNodeAtIndex(2, new Node(7));
+  singlyLinkedList.insertNodeAtIndex(0, new Node(7));
+  singlyLinkedList.removeNodeAtInde(0);
+  singlyLinkedList.removeNodeAtInde(1);
 
   singlyLinkedList.printSinglyLinkedList();
 }
