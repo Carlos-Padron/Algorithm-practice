@@ -166,15 +166,35 @@ export default class SinglyLinkedList {
   }
 
   //Get last element and removes it
-  pop() {}
+  pop() {
+    if (!this.head) {
+      return null;
+    }
+
+    let n = this.head;
+    let prevNode = null;
+
+    while (n.next != null) {
+      prevNode = n;
+      n = n.next;
+    }
+
+    prevNode.next = null;
+
+    return n;
+  }
 
   //Get the first element and removes it
   shift() {
-    
+    if (!this.head) {
+      return null;
+    }
+
+    let newHead = this.head.next;
+    let oldHead = this.head;
+    this.head = newHead;
+    return oldHead;
   }
-
-
-
 }
 
 // function main() {
