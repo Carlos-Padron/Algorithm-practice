@@ -1,4 +1,4 @@
-class Node {
+export class Node {
   constructor(data) {
     this.data = data;
     this.next = null;
@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-class DoublyLinkedList {
+export default class DoublyLinkedList {
   constructor(head) {
     this.head = head;
   }

@@ -53,7 +53,7 @@ function checkPermutation(str1, str2) {
 //  1.3 URLify
 // Replace all spaces with %20
 function URLify(str) {
-  let strArray = Array.from(str);
+  let strArray = Array.from(str.trim());
   for (let index = 0; index < strArray.length; index++) {
     if (strArray[index] == " ") {
       strArray[index] = "%20";
@@ -65,7 +65,6 @@ function URLify(str) {
 //console.log(URLify("MR John Smith    "))
 
 //  1.4  Palindome Permutation
-//TODO
 function isAPalindronmePermutation(str) {
   let cleanString = str.split(" ").join("");
 
@@ -123,7 +122,3 @@ function stringCompression(str) {
 }
 
 //console.log(stringCompression("aabcccccaaa"));
-
-
-
-
