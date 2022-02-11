@@ -122,3 +122,53 @@ function stringCompression(str) {
 }
 
 //console.log(stringCompression("aabcccccaaa"));
+
+//Leet code
+function twoSum(nums, target) {
+  let hash = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    if (!hash[nums[i]]) {
+      hash[nums[i]] = i;
+    }
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    if (hash[target - nums[i]] && hash[target - nums[i]] != i) {
+      return [hash[target - nums[i]], i];
+    }
+  }
+
+  return [];
+}
+
+var checkString = function (s) {
+  let previousChar = "";
+  for (let i = 0; i < s.length; i++) {
+    console.log(previousChar);
+
+    if (previousChar == "b" && s[i] == "a") {
+      return false;
+    }
+
+    previousChar = s[i];
+  }
+  return true;
+};
+
+var maxProfit = function (prices) {
+  let maxValue = 0;
+  let buyPointer = 0;
+  let sellPointer = 1;
+
+  while (sellPointer < prices.length) {
+    if (prices[buyPointer] < prices[sellPointer]) {
+      let max = prices[sellPointer] - prices[buyPointer];
+      maxValue = maxValue < max ? max : maxValue;
+    } else {
+      buyPointer = sellPointer;
+    }
+    sellPointer++;
+  }
+  return maxValue;
+};
