@@ -84,7 +84,7 @@ function isAPalindronmePermutation(str) {
 
 //  1.5 One Way
 
-function oneWay(string) {}
+function oneWay(string) { }
 
 //  1.6  String Compression
 
@@ -277,4 +277,69 @@ var intToRoman = function (num) {
   }
 
   return romanNumeral;
+}
+
+
+/** 1305. All Elements in Two Binary Search Trees
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root1
+ * @param {TreeNode} root2
+ * @return {number[]}
+ */
+var getAllElements = function (root1, root2) {
+
+  let queue1 = [root1]
+  let queue2 = [root2]
+  let arr = []
+
+  while (queue1.length != 0) {
+
+    let node = queue1.shift()
+
+    if (node.val != undefined || node.val != null) {
+      arr.push(node.val)
+    }
+
+    if (node.left) {
+      queue1.push(node.left)
+    }
+
+    if (node.right) {
+      queue1.push(node.right)
+    }
+
+  }
+
+
+  while (queue2.length != 0) {
+
+    let node = queue2.shift()
+
+    if (node.val != undefined || node.val != null) {
+      arr.push(node.val)
+    }
+
+    if (node.left) {
+      queue2.push(node.left)
+    }
+
+    if (node.right) {
+      queue2.push(node.right)
+    }
+
+  }
+
+
+  //console.log(arr.sort())
+
+  return arr.sort()
+
+
 };
