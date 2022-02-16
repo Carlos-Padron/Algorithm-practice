@@ -222,3 +222,158 @@ export default class SinglyLinkedList {
 // }
 
 //main();
+
+//Leetcode
+
+/**
+ * 21. Merge Two Sorted Lists
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function (list1, list2) {
+
+
+  let head = null
+  let sortedList = null
+
+  while (list1 != null || list2 != null) {
+
+
+    if (list1 != null && list2 != null) {
+      //there are nodes left in both linked list
+      if (list1.val > list2.val) {
+        //List2 has a value less than list1
+        if (head == null) {
+          //Sets the head and start ordering the list
+          head = list2
+          sortedList = list2
+        } else {
+          //Append a new node to the sorted list
+          sortedList.next = list2
+          sortedList = sortedList.next
+        }
+        list2 = list2.next
+      } else {
+        //List1 has a value less than list2
+        if (head == null) {
+          //Sets the head and start ordering the list
+          head = list1
+          sortedList = list1
+        } else {
+          //Append a new node to the sorted list
+          sortedList.next = list1
+          sortedList = sortedList.next
+
+        }
+        list1 = list1.next
+      }
+
+
+    } else if (list1 == null && list2 != null) {
+      //there are nodes left only in the list2
+      if (head == null) {
+        head = list2
+        sortedList = list2
+        return head
+      } else {
+        sortedList.next = list2
+        sortedList = sortedList.next
+
+      }
+      list2 = list2.next
+
+    } else {
+      //there are nodes left only in the list1
+      if (head == null) {
+        head = list1
+        sortedList = list1
+        return head
+
+      } else {
+        sortedList.next = list1
+        sortedList = sortedList.next
+
+      }
+      list1 = list1.next
+
+    }
+  }
+
+  return head
+
+
+
+
+};
+
+
+/**
+ * 86. Partition List
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} x
+ * @return {ListNode}
+ */
+ var partition = function(head, x) {
+  let rightHead = null
+  let rightTail = null
+  let leftHead = null
+  let leftTail = null
+  
+  while(head != null){
+      
+      if(head.val < x){
+          
+           //Append node to left
+          if(leftHead == null){
+              leftHead = leftTail = {...head}
+              leftHead.next = leftTail.next = null
+              
+          }else{
+              leftTail.next = {...head}
+              leftTail = leftTail.next
+              leftTail.next = null
+          }
+
+      }else{
+         
+          //Append node to right
+          if(rightHead == null){
+              rightHead = rightTail = {...head}
+              rightHead.next = rightTail.next = null
+          }else{
+              rightTail.next = {...head}
+              rightTail = rightTail.next
+              rightTail.next = null
+          }
+      }
+
+      head = head.next
+  
+  }
+  
+  if(leftTail){
+      leftTail.next = rightHead
+      return leftHead
+  }else{
+      return rightHead
+  }
+};
+
+
+
+

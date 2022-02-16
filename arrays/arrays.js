@@ -172,3 +172,109 @@ var maxProfit = function (prices) {
   }
   return maxValue;
 };
+
+/**
+ * @param {string[]} logs
+ * @return {number}
+ */
+var minOperations = function (logs) {
+  let nOperations = 0;
+
+  for (let i = 0; i < logs.length; i++) {
+    let op = logs[i];
+
+    if (op == "../" && nOperations > 0) {
+      nOperations--;
+    }
+
+    if (op != "./" && op != "../") {
+      nOperations++;
+    }
+  }
+
+  return nOperations;
+};
+
+/**
+ * @param {string} date1
+ * @param {string} date2
+ * @return {number}
+ */
+var daysBetweenDates = function (date1, date2) {
+  let fDate = new Date(date1);
+  let sDate = new Date(date2);
+  // hours*minutes*seconds*milliseconds
+  return Math.abs((sDate - fDate) / (24 * 60 * 60 * 1000));
+};
+
+var romanToInt = function (s) {
+  let hash = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+
+  let number = 0;
+  let prevLetter = "";
+
+  if (s.length == 1) return hash[s];
+
+  Array.from(s).forEach((elem, index) => {
+    if (index == 0) {
+      number += hash[elem];
+    } else {
+      number += hash[elem];
+
+      if (hash[prevLetter] < hash[elem]) {
+        number -= hash[prevLetter] * 2;
+      }
+    }
+
+    prevLetter = elem;
+  });
+
+  return number;
+};
+
+/**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function (num) {
+  const vals = [
+    { val: 1000, rom: "M" },
+    { val: 900, rom: "CM" },
+    { val: 500, rom: "D" },
+    { val: 400, rom: "CD" },
+    { val: 100, rom: "C" },
+    { val: 90, rom: "XC" },
+    { val: 50, rom: "L" },
+    { val: 40, rom: "XL" },
+    { val: 10, rom: "X" },
+    { val: 9, rom: "IX" },
+    { val: 5, rom: "V" },
+    { val: 4, rom: "IV" },
+    { val: 1, rom: "I" },
+  ];
+
+  let currentNum = num;
+  let romanNumeral = "";
+  let i = 0;
+
+  while (currentNum > 0) {
+    const { val, rom } = vals[i];
+
+    while (currentNum >= val) {
+      romanNumeral += rom;
+      currentNum -= val;
+    }
+
+    i++;
+  }
+
+  return romanNumeral;
+};
