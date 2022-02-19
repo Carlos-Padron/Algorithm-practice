@@ -343,3 +343,175 @@ var getAllElements = function (root1, root2) {
 
 
 };
+
+
+/**
+ * 2. Add Two Numbers
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+
+  let remain = 0
+
+  let list = null
+  let listHead = null
+
+  while ((l1 || l2 || remain != 0)) {
+
+    if (l1 && l2) {
+
+      if (listHead == null) {
+
+        let sum = parseInt(l1.val) + parseInt(l2.val) + parseInt(remain)
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+
+        } else {
+          remain = 0
+        }
+
+        list = new ListNode(sum)
+        listHead = list
+        l1 = l1.next
+        l2 = l2.next
+
+
+      } else {
+
+        let sum = parseInt(l1.val) + parseInt(l2.val) + parseInt(remain)
+
+
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+        } else {
+          remain = 0
+        }
+
+
+        list.next = new ListNode(sum)
+        list = list.next
+
+        l1 = l1.next
+        l2 = l2.next
+      }
+
+    } else if (l1 && !l2) {
+      //l1 has nodes bit l2 doesnt
+      if (listHead == null) {
+
+        let sum = parseInt(l1.val) + parseInt(remain)
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+        } else {
+          remain = 0
+        }
+
+
+        list = new ListNode(sum)
+        listHead = list
+        l1 = l1.next
+
+      } else {
+
+        let sum = parseInt(l1.val) + parseInt(remain)
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+        } else {
+          remain = 0
+        }
+
+
+        list.next = new ListNode(sum)
+        list = list.next
+
+        l1 = l1.next
+      }
+    }
+    else if (!l1 && l2) {
+
+      //l2 has nodes but l1 doesnt 
+      if (listHead == null) {
+
+        let sum = parseInt(l2.val) + parseInt(remain)
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+        } else {
+          remain = 0
+        }
+
+
+        list = new ListNode(sum)
+        listHead = list
+        l2 = l2.next
+
+      } else {
+
+
+        let sum = parseInt(l2.val) + parseInt(remain)
+
+
+        if (sum == 100) {
+          remain = sum.toString().substring(0, sum.toString().length - 1)
+          sum = sum.toString().substring(2, sum.toString().length)
+        } else if (sum >= 10) {
+          remain = sum.toString().substring(0, 1)
+          sum = sum.toString().substring(1, sum.toString().length)
+
+        } else {
+          remain = 0
+        }
+
+
+
+
+        list.next = new ListNode(parseInt(sum))
+        list = list.next
+
+        l2 = l2.next
+      }
+    }
+    else {
+      list.next = new ListNode(remain)
+      remain = 0
+
+    }
+
+  }
+
+  return listHead
+};
+

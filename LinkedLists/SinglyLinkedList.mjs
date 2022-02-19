@@ -328,52 +328,187 @@ var mergeTwoLists = function (list1, list2) {
  * @param {number} x
  * @return {ListNode}
  */
- var partition = function(head, x) {
+var partition = function (head, x) {
   let rightHead = null
   let rightTail = null
   let leftHead = null
   let leftTail = null
-  
-  while(head != null){
-      
-      if(head.val < x){
-          
-           //Append node to left
-          if(leftHead == null){
-              leftHead = leftTail = {...head}
-              leftHead.next = leftTail.next = null
-              
-          }else{
-              leftTail.next = {...head}
-              leftTail = leftTail.next
-              leftTail.next = null
-          }
 
-      }else{
-         
-          //Append node to right
-          if(rightHead == null){
-              rightHead = rightTail = {...head}
-              rightHead.next = rightTail.next = null
-          }else{
-              rightTail.next = {...head}
-              rightTail = rightTail.next
-              rightTail.next = null
-          }
+  while (head != null) {
+
+    if (head.val < x) {
+
+      //Append node to left
+      if (leftHead == null) {
+        leftHead = leftTail = { ...head }
+        leftHead.next = leftTail.next = null
+
+      } else {
+        leftTail.next = { ...head }
+        leftTail = leftTail.next
+        leftTail.next = null
       }
 
-      head = head.next
-  
+    } else {
+
+      //Append node to right
+      if (rightHead == null) {
+        rightHead = rightTail = { ...head }
+        rightHead.next = rightTail.next = null
+      } else {
+        rightTail.next = { ...head }
+        rightTail = rightTail.next
+        rightTail.next = null
+      }
+    }
+
+    head = head.next
+
   }
-  
-  if(leftTail){
-      leftTail.next = rightHead
-      return leftHead
-  }else{
-      return rightHead
+
+  if (leftTail) {
+    leftTail.next = rightHead
+    return leftHead
+  } else {
+    return rightHead
   }
 };
 
+
+/**
+ * 876. Middle of the Linked List
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function (head) {
+
+  let slowPointer = head
+  let fastPointer = head
+
+  while (fastPointer && fastPointer.next) {
+
+
+    slowPointer = slowPointer.next
+    fastPointer = fastPointer.next.next
+
+  }
+
+  return slowPointer
+
+
+};
+
+
+
+/**
+ * 82. Remove Duplicates from Sorted List II
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function (head) {
+
+  let hash = {}
+  let list = null
+  let listBody = null
+
+  while (head) {
+
+    if (hash[head.val]) {
+      hash[head.val]++
+    } else {
+      hash[head.val] = 1
+    }
+
+
+    if (head.next && head.val != head.next.val && hash[head.val] == 1) {
+      if (list == null) {
+        list = new ListNode(head.val)
+        listBody = list
+      } else {
+        listBody.next = new ListNode(head.val)
+        listBody = listBody.next
+      }
+
+    }
+
+    if (!head.next && hash[head.val] == 1) {
+
+      if (list == null) {
+        list = new ListNode(head.val)
+        listBody = list
+      } else {
+        listBody.next = new ListNode(head.val)
+        listBody = listBody.next
+      }
+
+    }
+
+    head = head.next
+
+
+  }
+
+  return list
+
+};
+
+/**
+ * 206. Reverse Linked List
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function (head) {
+  let arr = []
+  let list = null
+  let listBody = null
+
+  while (head) {
+    arr.push(head.val)
+    head = head.next
+  }
+
+  arr.reverse()
+
+  arr.forEach(elem => {
+
+    if (!list) {
+
+      list = new ListNode(elem)
+      listBody = list
+
+    } else {
+      listBody.next = new ListNode(elem)
+      listBody = listBody.next
+
+    }
+
+  })
+
+  return list
+
+
+};
 
 
 
