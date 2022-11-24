@@ -33,3 +33,43 @@ var longestCommonPrefix = function(strs) {
 return oneWord ? fisrtWord : pre 
     
 }; 
+
+
+//66. Plus One
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    
+    let count = 0
+    let arrLen = digits.length - 1
+    
+    for(let i = arrLen ; i >= 0 ;i-- ){
+        
+        if(arrLen == i){
+            if(digits[i] < 9){
+                digits[i] = digits[i] + 1
+            }else{
+                digits[i] = 0
+                count++
+            }
+        }else{
+            if(count != 0){
+                if(digits[i] < 9){
+                    digits[i] = digits[i] + count
+                    count = 0
+                }else{
+                    digits[i] = 0
+                }
+            }
+        }
+    }
+
+    if(count != 0){
+        digits.unshift(count)
+    }
+    
+    return digits
+    
+};
