@@ -169,3 +169,105 @@ var containsDuplicate = function(nums) {
     return false
     
 };
+
+
+
+
+//242. Valid Anagram
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+    
+    if(s.length != t.length){
+        return false
+    }
+    
+    //Store counter of each letter
+    let hash1 = {}
+    let hash2 = {}
+    let verifiedHash = {}
+    
+    //Count every letter of the first word
+    Array.from(s).forEach((letter, index) =>{
+        if(!hash1[letter]){
+            hash1[letter] = 1
+        }else{
+            let counter = hash1[letter]
+            hash1[letter] = counter + 1
+        }
+    })
+    
+    
+    for(let i = 0; i < t.length; i++){
+        let letter = t[i]
+        
+        if(!hash2[letter]){
+            hash2[letter] = 1
+            
+            //Validate if the letter is in the hash1
+            if(!hash1[letter]){
+                //If not, return false
+                return false;
+            }else if( hash2[letter] == hash1[letter] ){
+                //Check if the counter in every hash has the same value
+                verifiedHash[letter] = true;
+            }else{
+                verifiedHash[letter] = false;
+            }
+            
+            
+        }else{
+            let counter = hash2[letter]
+            hash2[letter] = counter + 1
+            
+            //Check if the counter in every hash has the same value
+            if( hash2[letter] == hash1[letter] ){
+                verifiedHash[letter] = true;
+            }else{
+                verifiedHash[letter] = false;
+            }
+            
+        }
+        
+    }
+    
+    return Object.values(verifiedHash).every(value => value == true)
+    
+};
+
+
+
+//125. Valid Palindrome
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    
+    let lowerCasedWord = s.toLowerCase()
+    let cleanWord = lowerCasedWord.replace(/[^0-9a-z]/g, '');
+    
+    ///////
+    let cleanWordArray = cleanWord.split('')
+    let reversedWord = cleanWordArray.reverse().join('')
+    
+    return cleanWord == reversedWord
+    
+    /////// or ///////  
+    
+     let j = cleanWord.length - 1;
+     let isPalindrome = true;
+     for (let i = 0; i < cleanWord.length; i++) {
+       if (cleanWord[i] != cleanWord[j]) {
+          isPalindrome = false;
+        }
+        j--;
+     }
+
+    return isPalindrome;
+};
+
