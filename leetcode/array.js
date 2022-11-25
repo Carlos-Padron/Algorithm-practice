@@ -136,3 +136,53 @@ var isPalindrome = function(s) {
     return isPalindrome;
 };
 
+
+
+
+//344. Reverse String
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function(s) {
+    
+    let left = 0
+    let right = s.length - 1 
+    
+    for(left; left < right ; left++){
+        
+        let fist = s[left]
+        let last = s[right]
+        
+        s[left] = last
+        s[right] = fist
+         right--
+    }
+    
+
+    return s
+};
+
+
+//283. Move Zeroes
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+    
+   for(let i = 0; i < nums.length; i++){
+       
+       for(let j = i + 1; j < nums.length; j++){
+           
+           let left = nums[i]
+           let right = nums[j]
+           
+           if(left == 0){
+               nums[j] = left
+               nums[i] = right
+           }
+       }
+   }
+    
+};
