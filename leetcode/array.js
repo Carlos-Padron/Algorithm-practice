@@ -186,3 +186,61 @@ var moveZeroes = function(nums) {
    }
     
 };
+
+
+
+//118. Pascal's Triangle
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function(numRows) {
+    
+    let triangle =  [[1],[1,1]]
+    
+    
+    if(numRows == 1){
+        return [[1]]
+    }
+    
+    if(numRows == 2){
+        return [[1],[1,1]]
+    }
+    
+    
+    //This pointers help to read de values from the previous level
+    //Fast pointer points next value 
+    //Fast pointer points the current value 
+    let fast = 1;
+    
+    //Start on index 1 because is level 2
+    for(let i = 1; i < numRows - 1  ; i++ ){
+        //Previous level array
+        let previousLevel = triangle[i]
+        
+        // array that stores the level that is being developed
+        let nextLevel = [1]
+        
+        //the fast pointer will iterate 
+        for(let slow = 0; fast < previousLevel.length ; slow++ ){
+            
+            let nextValue =  previousLevel[slow] + previousLevel[fast]
+            nextLevel.push(nextValue)
+            
+            //increase fast pointer
+            fast++
+        }
+        
+        //Reset fast pointer
+        fast = 1;
+        
+        nextLevel.push(1)
+        
+        triangle.push(nextLevel)
+        
+    }
+    
+    return triangle
+    
+    
+};
