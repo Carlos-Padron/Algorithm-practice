@@ -261,3 +261,35 @@ var singleNumber = function(nums) {
     
     
 };
+
+
+//169. Majority Element
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    
+    let hash = {}
+    
+    nums.forEach(n =>{
+        if(!hash[n]){
+            hash[n] = 1
+        }else{
+            let counter = hash[n]
+            hash[n] = counter + 1
+        }
+    })
+    
+    
+    let majority = {'count':0, 'number': '' };
+    
+    for (const [key, value] of Object.entries(hash)){
+        if(value > majority['count']){
+            majority['count'] = value
+            majority['number'] = key
+        }
+    }
+    
+    return majority['number']    
+};
