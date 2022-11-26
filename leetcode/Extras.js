@@ -20,3 +20,23 @@ var mySqrt = function(x) {
     return x < 0 ? squareRoot - 1 : squareRoot
     
 };
+
+
+//326. Power of Three
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfThree = function(n) {
+    
+    let remainer = n
+    
+    while (remainer > 3){
+        
+        remainer =  remainer / 3
+        
+    }
+    
+    return remainer == 3 || remainer == 1 ? true: false
+    
+};
