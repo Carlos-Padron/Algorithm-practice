@@ -41,3 +41,27 @@ var inorderTraversal = function(root) {
   
   return output;
 };
+
+
+
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+
+//ROOT, LEFT, RIGHT
+var preorderTraversal = function(root) {
+    
+    if(!root) return [];
+    const stack  = [root];
+    const result = [];
+    while(stack.length) {
+        let current = stack.pop();
+        result.push(current.val)
+        if(current.right) stack.push(current.right);
+        if(current.left) stack.push(current.left);
+    }
+
+    return result;
+    
+};
